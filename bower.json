@@ -1,0 +1,23 @@
+{
+  "name": "hamburger-button",
+  "homepage": "https://github.com/Pahlaz/hamburger-button",
+  "authors": [
+    "Divyank Pahlazani <pahlaz.divyank@gmail.com>"
+  ],
+  "description": "Hamburger Button made using polymer",
+  "main": "hamburger-button.html",
+  "keywords": [
+    "web-components"
+  ],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "polymer": "Polymer/polymer#^1.7.1"
+  }
+}
