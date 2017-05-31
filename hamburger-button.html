@@ -4,62 +4,90 @@
 	<template>
 		<style>
 			:host{
-				display: inline-block;
+				display: inline-flex;
 			}
+			:root {
+				--btn-width: 20px;
+				--btn-height: 20px;
+				--btn-color: #eee;
+				--btn-transition: width .3s ease-in-out, transform .3s ease-in-out, background .15s ease-in-out;
+			}
+
 			/* Toggle Button */
 			.toggle-btn{
 				/* default properties */
-				width: 30px;
-				height: 20px;
+				width: var(--btn-width);
+				height: var(--btn-height);
 
+				outline: none;
+				background: transparent;
+				border: 0;
+				padding: 0;
 				box-sizing: border-box;
 				position: relative;
-				display: flex;
+				display: inline-flex;
 				cursor: pointer;
 			}
-
-			.toggle-btn span, .toggle-btn span:before, .toggle-btn span:after{
-				width: 100%;
+			.toggle-btn span, .toggle-btn span::before, .toggle-btn span::after{
+				/* default property */
+				background: var(--btn-color);
+				transition: var(--btn-transition);
 				height: 2px;
+
+				width: 100%;
 				background: inherit;
 				position: absolute;
-				transition: width .3s ease-in-out, transform .3s ease-in-out, background .15s ease-in-out;
 			}
 			.toggle-btn span{
-				/* default property */
-				background: #000;
-
 				top: calc(50% - 1px);
 			}
-			.toggle-btn span:before{
+			.toggle-btn span::before{
 				content: '';
-				top: -8px;
+				top: -6px;
+				left: 0;
 			}
-			.toggle-btn span:after{
+			.toggle-btn span::after{
 				content: '';
-				top: 8px;
+				top: 6px;
+				left: 0;
 			}
 			.toggle-btn.onclick span{
-				background: none;
+				background: none !important;
 			}
-			.toggle-btn.onclick span:before{
-				transform: translateY(8px) rotate(45deg);
+			.toggle-btn.onclick span::before{
+				background:  var(--btn-color);
+				transform: translateY(6px) rotate(45deg);
 			}
-			.toggle-btn.onclick span:after{
-				transform: translateY(-8px) rotate(-45deg);
+			.toggle-btn.onclick span::after{
+				background:  var(--btn-color);
+				transform: translateY(-6px) rotate(-45deg);
 			}
 		</style>
-		<div class="toggle-btn" style$="width:{{width}}px; height:{{height}}px">
+
+		<button class$="toggle-btn {{class}}" style$="width:{{width}}px; height:{{height}}px;">
 			<span style$=" background: {{color}}"></span>
-		</div>
+		</button>
 	</template>
 
 	<script>
-		Polymer({
-			is: 'hamburger-button',
-			width: Number,
-			height: Number,
-			color: String,
-		});
+		(function(){
+			'use strict'
+		
+			window.onload = () => {
+				Polymer({
+					is: 'hamburger-button',
+					width: Number,
+					height: Number,
+					color: String,
+					class: String,
+				});
+
+				var toggleBtn = document.querySelector('.toggle-btn');
+
+				toggleBtn.onclick = () => {
+					document.querySelector('.toggle-btn').classList.toggle('onclick');
+				};
+			};
+		})();
 	</script>
 </dom-module>
